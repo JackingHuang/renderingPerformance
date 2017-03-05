@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -28,4 +28,12 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.1'
     testCompile 'junit:junit:4.12'
+}
+
+publish {
+    groupId = 'com.wanjian'
+    artifactId = 'rp'
+    publishVersion = '0.0.1'
+    desc = ''
+    website = 'https://github.com/android-notes/renderingPerformance'
 }
