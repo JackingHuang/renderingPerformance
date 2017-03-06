@@ -90,7 +90,6 @@ final class Manager {
         mPerformance.eraseColor(0);
 
         traversalLayout(mRootView);
-
         analysePagePerformance();
 
         mDrawingBoardView.drawPerformance(mPerformance);
@@ -119,10 +118,11 @@ final class Manager {
     }
 
     private void analyseViewPerformance(View view) {
+        mDrawingBoardCanvas.save();
         long start = System.nanoTime();
         view.draw(mDrawingBoardCanvas);
         long duration = System.nanoTime() - start;
-
+        mDrawingBoardCanvas.restore();
         float time = duration / 10_000 / 100f;
 
         int configColor = mConfig.coverColor() & 0x00FFFFFF;
@@ -147,10 +147,30 @@ final class Manager {
     }
 
     private void analysePagePerformance() {
-        long start = System.nanoTime();
-        mRootView.draw(mDrawingBoardCanvas);
-        long duration = System.nanoTime() - start;
 
+
+        long duration = 0;
+        // view.findViewById(android.R.id.content).draw(mCanvas);
+        ViewGroup viewGroup = ((ViewGroup) mRootView);
+        for (int i = viewGroup.getChildCount() - 1; i > -1; i--) {
+            View child = viewGroup.getChildAt(i);
+            if (child instanceof CoverView) {
+                continue;
+            }
+            mDrawingBoardCanvas.save();
+            long start = System.nanoTime();
+
+            child.draw(mDrawingBoardCanvas);
+
+            duration += (System.nanoTime() - start);
+            mDrawingBoardCanvas.restore();
+        }
+
+//        mDrawingBoardCanvas.save();
+//        long start = System.nanoTime();
+//        mRootView.draw(mDrawingBoardCanvas);
+//        long duration = System.nanoTime() - start;
+//        mDrawingBoardCanvas.restore();
         String time = String.valueOf(duration / 10_000 / 100f);
 
         mPaint.setTextSize(mPageTextSize);

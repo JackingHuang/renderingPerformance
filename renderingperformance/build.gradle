@@ -33,7 +33,7 @@ dependencies {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'rp'
-    publishVersion = '0.0.1'
+    publishVersion = '0.0.1.1'
     desc = ''
     website = 'https://github.com/android-notes/renderingPerformance'
 }
