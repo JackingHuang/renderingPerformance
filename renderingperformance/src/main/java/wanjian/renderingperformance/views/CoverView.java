@@ -2,6 +2,7 @@ package wanjian.renderingperformance.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import wanjian.renderingperformance.R;
@@ -10,7 +11,7 @@ import wanjian.renderingperformance.R;
  * Created by wanjian on 2017/3/5.
  */
 
-public class CoverView extends RelativeLayout {
+public class CoverView extends FrameLayout {
     public CoverView(Context context) {
         super(context);
         init(context);

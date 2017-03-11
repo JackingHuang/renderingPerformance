@@ -58,10 +58,13 @@ final class Manager {
 
     private void init() {
         mDrawingBoardView = (DrawingBoardView) mCoverView.findViewById(R.id.drawingBoard);
-        ((CheckBox) mCoverView.findViewById(R.id.on_off)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        View btn = mCoverView.findViewById(R.id.on_off);
+        btn.setSelected(false);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
+            public void onClick(View v) {
+                v.setSelected(!v.isSelected());
+                if (v.isSelected()) {
                     mMetronome.post(mRhythm);
                 } else {
                     mMetronome.removeCallbacks(mRhythm);
@@ -100,10 +103,11 @@ final class Manager {
         if (view instanceof CoverView) {
             return;
         }
-        if (!mConfig.viewFilter().apply(view)) {
+        if (view.getVisibility() == View.GONE || view.getVisibility() == View.INVISIBLE) {
             return;
         }
-        if (view.getVisibility() == View.GONE || view.getVisibility() == View.INVISIBLE) {
+
+        if (!mConfig.viewFilter().apply(view)) {
             return;
         }
         if (view instanceof ViewGroup) {
@@ -126,7 +130,7 @@ final class Manager {
         float time = duration / 10_000 / 100f;
 
         int configColor = mConfig.coverColor() & 0x00FFFFFF;
-        int alpha = (int) (time / mConfig.threshold() * 0x00000011);
+        int alpha = (int) (time / mConfig.threshold() * 0x0000000A);
         if (alpha > 0x000000FF) {
             alpha = 0x000000FF;
         }
@@ -150,28 +154,37 @@ final class Manager {
 
 
         long duration = 0;
-        // view.findViewById(android.R.id.content).draw(mCanvas);
-        ViewGroup viewGroup = ((ViewGroup) mRootView);
-        for (int i = viewGroup.getChildCount() - 1; i > -1; i--) {
-            View child = viewGroup.getChildAt(i);
-            if (child instanceof CoverView) {
-                continue;
-            }
-            mDrawingBoardCanvas.save();
-            long start = System.nanoTime();
-
-            child.draw(mDrawingBoardCanvas);
-
-            duration += (System.nanoTime() - start);
-            mDrawingBoardCanvas.restore();
+//        ViewGroup viewGroup = ((ViewGroup) mRootView);
+//        for (int i = viewGroup.getChildCount() - 1; i > -1; i--) {
+//            View child = viewGroup.getChildAt(i);
+//            if (child instanceof CoverView) {
+//                continue;
+//            }
+//            mDrawingBoardCanvas.save();
+//            long start = System.nanoTime();
+//
+//            child.draw(mDrawingBoardCanvas);
+//
+//            duration += (System.nanoTime() - start);
+//            mDrawingBoardCanvas.restore();
+//        }
+        View content = mRootView.findViewById(android.R.id.content);
+        if (content == null) {
+            return;
         }
+        mDrawingBoardCanvas.save();
+        long start = System.nanoTime();
 
-//        mDrawingBoardCanvas.save();
-//        long start = System.nanoTime();
-//        mRootView.draw(mDrawingBoardCanvas);
-//        long duration = System.nanoTime() - start;
-//        mDrawingBoardCanvas.restore();
-        String time = String.valueOf(duration / 10_000 / 100f);
+        content.draw(mDrawingBoardCanvas);
+
+        duration += (System.nanoTime() - start);
+        mDrawingBoardCanvas.restore();
+
+        float t = duration / 10_000 / 100f;
+        mPerformanceCanvas.save();
+        mConfig.pagePerformanceGraph().time(mPerformanceCanvas,  t);
+        mPerformanceCanvas.restore();
+        String time = String.valueOf(t);
 
         mPaint.setTextSize(mPageTextSize);
         mPaint.setColor(0xFFFF0000);

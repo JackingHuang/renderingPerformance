@@ -4,19 +4,13 @@
        android:layout_height="match_parent"
        android:orientation="vertical">
 
-    <CheckBox
+    <wanjian.renderingperformance.views.FloatView
         android:id="@+id/on_off"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:checked="false"
-        android:text="ON_OFF"
-        android:textColor="#000"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
         android:padding="2dp"
-        android:background="@drawable/rendering_performance_border_bag"/>
+        android:background="@drawable/rp_switch_btn_bag"/>
 
 
     <wanjian.renderingperformance.views.DrawingBoardView

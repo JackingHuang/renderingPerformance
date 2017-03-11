@@ -6,7 +6,6 @@ import android.os.Build;
 
 import wanjian.renderingperformance.adapter.LifecycleCallbacksAdapter;
 import wanjian.renderingperformance.config.Config;
-import wanjian.renderingperformance.config.DefaultConfig;
 import wanjian.renderingperformance.utils.Check;
 
 /**
@@ -21,12 +20,16 @@ public final class RenderingPerformance {
 
     private static Manager sManager;
 
+    public static void init(Application application) {
+        Check.isNull(application, "application should not be null !");
+        init(application, null);
+    }
 
     public static void init(Application application, Config config) {
         Check.isNull(application, "application should not be null !");
 
         if (config == null) {
-            config = new DefaultConfig();
+            config = new Config.Build(application).build();
         }
         sManager = new Manager(application, config);
 
