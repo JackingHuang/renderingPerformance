@@ -64,7 +64,7 @@ public class Config {
 
     public static class Build {
         ViewFilter mViewFilter = new DefaultViewFilter();
-        long mTimeInterval = 1000;
+        long mTimeInterval = 500;
         boolean mShowTime = true;
         int mThreshold = 2;
         int mCoverColor = 0xFFFF0000;

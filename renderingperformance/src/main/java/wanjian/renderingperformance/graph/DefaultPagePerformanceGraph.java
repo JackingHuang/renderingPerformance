@@ -44,7 +44,7 @@ public class DefaultPagePerformanceGraph extends IPagePerformanceGraph {
     }
 
     protected int getGraphColor() {
-        return 0x66FF0000;
+        return 0x660000FF;
     }
 
     protected int getGraphWidth() {

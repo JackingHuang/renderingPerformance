@@ -22,6 +22,11 @@ public class App extends Application {
                     protected int getFactor() {
                         return super.getFactor() * 20;
                     }
+
+                    @Override
+                    protected int getGraphColor() {
+                        return 0x660000ff;
+                    }
                 })
                 .build();
 
