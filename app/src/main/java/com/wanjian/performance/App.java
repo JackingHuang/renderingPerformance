@@ -16,7 +16,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Config config = new Config.Build(this)
-                .timeInterval(200)
+//                .timeInterval(100)
                 .pagePerformanceGraph(new DefaultPagePerformanceGraph(this) {
                     @Override
                     protected int getFactor() {

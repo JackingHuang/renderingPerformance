@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '22.0.1'
+    compileSdkVersion 22
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
 
@@ -26,14 +26,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:appcompat-v7:22+'
     testCompile 'junit:junit:4.12'
 }
 
 publish {
     groupId = 'com.wanjian'
     artifactId = 'rp'
-    publishVersion = '0.0.1.2'
+    publishVersion = '0.0.1.3'
     desc = 'renderingPerformance tool'
     website = 'https://github.com/android-notes/renderingPerformance'
 }
