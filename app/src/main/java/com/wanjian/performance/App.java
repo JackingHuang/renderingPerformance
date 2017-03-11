@@ -1,6 +1,8 @@
 package com.wanjian.performance;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
 
 import wanjian.renderingperformance.RenderingPerformance;
 import wanjian.renderingperformance.config.Config;
