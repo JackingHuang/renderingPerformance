@@ -109,3 +109,11 @@ nored提供了柱状统计图`DefaultPagePerformanceGraph`和折线统计图`Pol
 
 ```
 
+### GitHub
+
+[https://github.com/android-notes/renderingPerformance](https://github.com/android-notes/renderingPerformance)
+
+
+效果视频
+
+[http://weibo.com/tv/v/EzkwjkjgM?fid=1034:41e23e772b51b3d00eacc1e7b2491975](http://weibo.com/tv/v/EzkwjkjgM?fid=1034:41e23e772b51b3d00eacc1e7b2491975)
